@@ -1,0 +1,631 @@
+// Variables
+$primary-color: #D4A574
+$secondary-color: #E8C4A0
+$accent-color: #B8956A
+$text-dark: #2C1810
+$text-light: #F5F1EC
+$background-light: #FAF8F5
+$white: #FFFFFF
+$warm-gray: #F0EDE8
+$gold: #C9A96E
+
+// Fonts
+$font-primary: 'Playfair Display', serif
+$font-secondary: 'Inter', sans-serif
+
+// Mixins
+@mixin flex-center
+  display: flex
+  justify-content: center
+  align-items: center
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease-in-out)
+  transition: $property $duration $timing
+
+@mixin button-style($bg-color, $text-color, $hover-bg)
+  background: $bg-color
+  color: $text-color
+  border: none
+  padding: 15px 30px
+  border-radius: 50px
+  text-decoration: none
+  font-weight: 600
+  font-family: $font-secondary
+  @include transition()
+  cursor: pointer
+  display: inline-flex
+  align-items: center
+  gap: 10px
+  
+  &:hover
+    background: $hover-bg
+    transform: translateY(-2px)
+    box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3)
+
+// Reset and Base Styles
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html
+  scroll-behavior: smooth
+
+body
+  font-family: $font-secondary
+  line-height: 1.6
+  color: $text-dark
+  background: $background-light
+
+.container
+  max-width: 1200px
+  margin: 0 auto
+  padding: 0 20px
+
+// Header
+.header
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  background: rgba(255, 255, 255, 0.95)
+  backdrop-filter: blur(10px)
+  z-index: 1000
+  @include transition()
+
+.nav
+  @include flex-center
+  justify-content: space-between
+  padding: 15px 30px
+  max-width: 1200px
+  margin: 0 auto
+
+.logo
+  font-family: $font-primary
+  font-size: 1.8rem
+  font-weight: 700
+  color: $primary-color
+  margin: 0
+
+.nav-menu
+  display: flex
+  list-style: none
+  gap: 30px
+
+.nav-link
+  text-decoration: none
+  color: $text-dark
+  font-weight: 500
+  position: relative
+  @include transition()
+  
+  &:hover
+    color: $primary-color
+    
+  &::after
+    content: ''
+    position: absolute
+    bottom: -5px
+    left: 0
+    width: 0
+    height: 2px
+    background: $primary-color
+    @include transition(width)
+    
+  &:hover::after
+    width: 100%
+
+.nav-toggle
+  display: none
+  flex-direction: column
+  gap: 4px
+  cursor: pointer
+  
+  span
+    width: 25px
+    height: 3px
+    background: $text-dark
+    @include transition()
+
+// Hero Section
+.hero
+  height: 100vh
+  position: relative
+  overflow: hidden
+  @include flex-center
+
+.hero-image
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: -1
+  
+  img
+    width: 100%
+    height: 100%
+    object-fit: cover
+    
+  &::after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: linear-gradient(45deg, rgba(212, 165, 116, 0.8), rgba(232, 196, 160, 0.6))
+
+.hero-content
+  text-align: center
+  color: $white
+  max-width: 800px
+  padding: 0 20px
+  animation: fadeInUp 1s ease-out
+
+.hero-title
+  font-family: $font-primary
+  font-size: 3.5rem
+  margin-bottom: 20px
+  font-weight: 700
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3)
+
+.hero-subtitle
+  font-size: 1.3rem
+  margin-bottom: 40px
+  font-weight: 300
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3)
+
+.hero-buttons
+  display: flex
+  gap: 20px
+  justify-content: center
+  flex-wrap: wrap
+
+.btn
+  @include button-style($primary-color, $white, #B8956A)
+
+.btn-primary
+  font-size: 1.1rem
+
+.btn-secondary
+  @include button-style(transparent, $white, rgba(255, 255, 255, 0.2))
+  border: 2px solid $white
+
+.btn-whatsapp
+  @include button-style(#25D366, $white, #20B558)
+
+.scroll-indicator
+  position: absolute
+  bottom: 30px
+  left: 50%
+  transform: translateX(-50%)
+  
+  span
+    display: block
+    width: 2px
+    height: 40px
+    background: $white
+    animation: scrollBounce 2s infinite
+
+// Section Styles
+section
+  padding: 100px 0
+
+.section-header
+  text-align: center
+  margin-bottom: 80px
+
+.section-title
+  font-family: $font-primary
+  font-size: 2.8rem
+  color: $text-dark
+  margin-bottom: 20px
+  font-weight: 600
+
+.section-subtitle
+  font-size: 1.2rem
+  color: #6B5B4F
+  max-width: 600px
+  margin: 0 auto
+
+// About Section
+.about
+  background: $white
+
+.about-content
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 80px
+  align-items: center
+
+.about-image
+  position: relative
+  
+  img
+    width: 100%
+    height: 500px
+    object-fit: cover
+    border-radius: 20px
+    box-shadow: 0 20px 50px rgba(212, 165, 116, 0.2)
+
+.about-text
+  h3
+    font-family: $font-primary
+    font-size: 2.2rem
+    margin-bottom: 25px
+    color: $text-dark
+    
+  p
+    font-size: 1.1rem
+    line-height: 1.8
+    margin-bottom: 40px
+    color: #4A3A2A
+
+.about-features
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+.feature
+  display: flex
+  align-items: flex-start
+  gap: 20px
+  
+  i
+    font-size: 2rem
+    color: $primary-color
+    margin-top: 5px
+    
+  h4
+    font-size: 1.3rem
+    margin-bottom: 8px
+    color: $text-dark
+    
+  p
+    color: #4A3A2A
+    line-height: 1.6
+
+// Services Section
+.services
+  background: $warm-gray
+
+.services-grid
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+  gap: 40px
+
+.service-card
+  background: $white
+  border-radius: 20px
+  overflow: hidden
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1)
+  @include transition()
+  
+  &:hover
+    transform: translateY(-10px)
+    box-shadow: 0 25px 60px rgba(212, 165, 116, 0.2)
+
+.service-image
+  height: 250px
+  overflow: hidden
+  
+  img
+    width: 100%
+    height: 100%
+    object-fit: cover
+    @include transition()
+    
+.service-card:hover .service-image img
+  transform: scale(1.1)
+
+.service-content
+  padding: 30px
+  position: relative
+  
+  h3
+    font-family: $font-primary
+    font-size: 1.5rem
+    margin-bottom: 15px
+    color: $text-dark
+    
+  p
+    color: #4A3A2A
+    line-height: 1.6
+    margin-bottom: 20px
+
+.service-duration
+  position: absolute
+  top: -15px
+  right: 20px
+  background: $primary-color
+  color: $white
+  padding: 8px 20px
+  border-radius: 50px
+  font-weight: 600
+  font-size: 0.9rem
+
+// Contact Section
+.contact
+  background: $white
+
+.contact-content
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 80px
+  align-items: center
+
+.contact-info
+  display: flex
+  flex-direction: column
+  gap: 40px
+
+.contact-item
+  display: flex
+  align-items: flex-start
+  gap: 20px
+  
+  i
+    font-size: 1.5rem
+    color: $primary-color
+    margin-top: 5px
+    
+  h4
+    font-size: 1.2rem
+    margin-bottom: 8px
+    color: $text-dark
+    
+  p
+    color: #4A3A2A
+    line-height: 1.6
+
+.whatsapp-cta
+  margin-top: 20px
+
+.contact-image
+  img
+    width: 100%
+    height: 400px
+    object-fit: cover
+    border-radius: 20px
+    box-shadow: 0 20px 50px rgba(212, 165, 116, 0.2)
+
+// Location Section
+.location
+  background: $warm-gray
+
+.location-content
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 80px
+  align-items: center
+
+.location-info
+  display: flex
+  flex-direction: column
+  gap: 40px
+
+.address
+  display: flex
+  align-items: flex-start
+  gap: 20px
+  
+  i
+    font-size: 1.5rem
+    color: $primary-color
+    margin-top: 5px
+
+.transport
+  h4
+    margin-bottom: 20px
+    color: $text-dark
+    font-size: 1.2rem
+    
+  ul
+    list-style: none
+    display: flex
+    flex-direction: column
+    gap: 15px
+    
+  li
+    display: flex
+    align-items: center
+    gap: 15px
+    color: #4A3A2A
+    
+    i
+      color: $primary-color
+      width: 20px
+
+.map-container
+  height: 400px
+  border-radius: 20px
+  overflow: hidden
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1)
+
+.map-placeholder
+  height: 100%
+  background: linear-gradient(135deg, $primary-color, $secondary-color)
+  @include flex-center
+  flex-direction: column
+  color: $white
+  text-align: center
+  cursor: pointer
+  @include transition()
+  
+  &:hover
+    background: linear-gradient(135deg, #B8956A, #C9A96E)
+    
+  i
+    font-size: 3rem
+    margin-bottom: 20px
+    
+  p
+    font-size: 1.2rem
+    font-weight: 600
+    margin-bottom: 10px
+    
+  small
+    opacity: 0.8
+
+// Footer
+.footer
+  background: $text-dark
+  color: $text-light
+  padding: 80px 0 30px
+
+.footer-content
+  display: grid
+  grid-template-columns: 2fr 1fr 1fr
+  gap: 60px
+  margin-bottom: 50px
+
+.footer-section
+  h3, h4
+    margin-bottom: 25px
+    color: $white
+    
+  h3
+    font-family: $font-primary
+    font-size: 1.8rem
+    
+  h4
+    font-size: 1.2rem
+    
+  p
+    line-height: 1.6
+    margin-bottom: 25px
+    color: #e0d6c6
+    
+  ul
+    list-style: none
+    display: flex
+    flex-direction: column
+    gap: 12px
+    
+  li
+    color: #e0d6c6
+    display: flex
+    align-items: center
+    gap: 10px
+    
+  a
+    color: #e0d6c6
+    text-decoration: none
+    @include transition()
+    
+    &:hover
+      color: $primary-color
+
+.social-links
+  display: flex
+  gap: 15px
+  
+  a
+    width: 40px
+    height: 40px
+    @include flex-center
+    background: rgba(212, 165, 116, 0.2)
+    border-radius: 50%
+    @include transition()
+    
+    &:hover
+      background: $primary-color
+      transform: translateY(-3px)
+
+.footer-bottom
+  text-align: center
+  padding-top: 30px
+  border-top: 1px solid rgba(255, 255, 255, 0.1)
+  color: #c2b8a8
+
+// Animations
+@keyframes fadeInUp
+  from
+    opacity: 0
+    transform: translateY(50px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes scrollBounce
+  0%, 20%, 50%, 80%, 100%
+    transform: translateY(0)
+  40%
+    transform: translateY(-10px)
+  60%
+    transform: translateY(-5px)
+
+// Responsive Design
+@media (max-width: 1024px)
+  .hero-title
+    font-size: 3rem
+    
+  .section-title
+    font-size: 2.4rem
+    
+  .about-content,
+  .contact-content,
+  .location-content
+    grid-template-columns: 1fr
+    gap: 50px
+    
+  .services-grid
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+    gap: 30px
+
+@media (max-width: 768px)
+  .nav-menu
+    display: none
+    
+  .nav-toggle
+    display: flex
+    
+  .hero-title
+    font-size: 2.5rem
+    
+  .hero-subtitle
+    font-size: 1.1rem
+    
+  .hero-buttons
+    flex-direction: column
+    align-items: center
+    
+  .section-title
+    font-size: 2rem
+    
+  .footer-content
+    grid-template-columns: 1fr
+    gap: 40px
+    text-align: center
+    
+  section
+    padding: 60px 0
+
+@media (max-width: 480px)
+  .container
+    padding: 0 15px
+    
+  .nav
+    padding: 15px 20px
+    
+  .hero-title
+    font-size: 2rem
+    
+  .hero-buttons .btn
+    width: 100%
+    justify-content: center
+    
+  .services-grid
+    grid-template-columns: 1fr
+    
+  .contact-item,
+  .feature
+    flex-direction: column
+    text-align: center
+    
+    i
+      margin-top: 0
+      
+  .social-links
+    justify-content: center
